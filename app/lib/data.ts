@@ -22,7 +22,6 @@ export async function fetchRevenue() {
     const data = await sql<Revenue>`SELECT * FROM revenue`;
     return data.rows;
   } catch (error) {
-    console.error('Database Error:', error);
     throw new Error('Failed to fetch revenue data.');
   }
 }
@@ -42,7 +41,6 @@ export async function fetchLatestInvoices() {
     }));
     return latestInvoices;
   } catch (error) {
-    console.error('Database Error:', error);
     throw new Error('Failed to fetch the latest invoices.');
   }
 }
@@ -111,7 +109,6 @@ export async function fetchFilteredInvoices(
 
     return invoices.rows;
   } catch (error) {
-    console.error('Database Error:', error);
     throw new Error('Failed to fetch invoices.');
   }
 }
@@ -132,7 +129,6 @@ export async function fetchInvoicesPages(query: string) {
     const totalPages = Math.ceil(Number(count.rows[0].count) / ITEMS_PER_PAGE);
     return totalPages;
   } catch (error) {
-    console.error('Database Error:', error);
     throw new Error('Failed to fetch total number of invoices.');
   }
 }
@@ -156,7 +152,6 @@ export async function fetchInvoiceById(id: string) {
     }));
     return invoice[0];
   } catch (error) {
-    console.error('Database Error:', error);
     throw new Error('Failed to fetch invoice.');
   }
 }
@@ -174,7 +169,6 @@ export async function fetchCustomers() {
     const customers = data.rows;
     return customers;
   } catch (err) {
-    console.error('Database Error:', err);
     throw new Error('Failed to fetch all customers.');
   }
 }
@@ -207,7 +201,6 @@ export async function fetchFilteredCustomers(query: string) {
 
     return customers;
   } catch (err) {
-    console.error('Database Error:', err);
     throw new Error('Failed to fetch customer table.');
   }
 }
@@ -217,7 +210,6 @@ export async function getUser(email: string) {
     const user = await sql`SELECT * FROM users WHERE email=${email}`;
     return user.rows[0] as User;
   } catch (error) {
-    console.error('Failed to fetch user:', error);
     throw new Error('Failed to fetch user.');
   }
 }
